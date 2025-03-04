@@ -107,6 +107,10 @@ module Foobara
           type_hash[:type] = [type_hash[:type], "null"]
         end
 
+        if !type.builtin? && type.description
+          type_hash[:description] = type.description
+        end
+
         type_hash
       end
     end

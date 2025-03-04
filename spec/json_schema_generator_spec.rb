@@ -37,9 +37,11 @@ RSpec.describe Foobara::JsonSchemaGenerator do
         end
 
         stub_class "SomeEntity", Foobara::Entity do
+          description "this is some entity!"
+
           attributes do
             id :integer
-            foo :integer, :required, one_of: [1, 2, 3]
+            foo :integer, :required, "must be one, two, or three", one_of: [1, 2, 3]
             some_other_entity SomeOtherEntity
             some_model SomeModel
           end
@@ -118,6 +120,19 @@ RSpec.describe Foobara::JsonSchemaGenerator do
         json = JSON.fast_generate(data)
 
         expect { JSON::Validator.validate!(JSON.parse(json_schema), JSON.parse(json)) }.to_not raise_error
+      end
+
+      context "when using an aggregate depth" do
+        let(:association_depth) { Foobara::JsonSchemaGenerator::AssociationDepth::AGGREGATE }
+
+        it "includes types in the json schema all the way down" do
+          expect(parsed_json_schema).to be_a(Hash)
+
+          expect(parsed_json_schema["properties"]["entity1"]["description"]).to eq("this is some entity!")
+          expect(
+            parsed_json_schema["properties"]["entity1"]["properties"]["foo"]["description"]
+          ).to eq("must be one, two, or three")
+        end
       end
     end
   end
