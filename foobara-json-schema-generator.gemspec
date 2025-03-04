@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Miles Georgi"]
   spec.email = ["azimux@gmail.com"]
 
-  spec.summary = "No description. Add one."
+  spec.summary = "Takes a Foobara type and converts it to a json schema"
   spec.homepage = "https://github.com/foobara/json-schema-generator"
   spec.license = "Apache-2.0 OR MIT"
   spec.required_ruby_version = Foobara::JsonSchemaGenerator::MINIMUM_RUBY_VERSION
