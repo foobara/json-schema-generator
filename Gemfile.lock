@@ -149,6 +149,9 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.10.1)
+    json-schema (5.1.1)
+      addressable (~> 2.8)
+      bigdecimal (~> 3.1)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
     listen (3.9.0)
@@ -268,6 +271,7 @@ DEPENDENCIES
   foobara-spec-helpers
   guard-rspec
   irb
+  json-schema
   pry
   pry-byebug
   rake

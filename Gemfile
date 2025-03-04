@@ -18,6 +18,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "json-schema"
   gem "pry"
   gem "pry-byebug"
   # TODO: Just adding this to suppress warnings seemingly coming from pry-byebug. Can probably remove this once
