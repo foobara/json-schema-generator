@@ -101,9 +101,9 @@ module Foobara
           type_hash[:enum] = one_of
         end
 
-        allows_nil = DataPath.value_at(:allow_nil, declaration_data)
+        allow_nil = DataPath.value_at(:allow_nil, declaration_data)
 
-        if allows_nil && type_hash.key?(:type)
+        if allow_nil && type_hash.key?(:type)
           type_hash[:type] = [type_hash[:type], "null"]
         end
 
