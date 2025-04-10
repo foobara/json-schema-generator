@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-json-schema-generator (0.0.3)
+    foobara-json-schema-generator (0.0.4)
       foobara (~> 0.0.92)
 
 GEM
@@ -54,7 +54,7 @@ GEM
       foobara-type-generator
       foobara-typescript-react-command-form-generator
       foobara-typescript-remote-command-generator
-    foobara (0.0.92)
+    foobara (0.0.96)
       bigdecimal
       foobara-lru-cache (~> 0.0.2)
       foobara-util (~> 0.0.11)
@@ -69,10 +69,10 @@ GEM
       foobara-files-generator
     foobara-dotenv-loader (0.0.3)
       dotenv
-    foobara-empty-ruby-project-generator (0.0.14)
-      extract-repo
-      foobara
-      foobara-files-generator
+    foobara-empty-ruby-project-generator (0.0.15)
+      extract-repo (~> 0.0.1)
+      foobara (~> 0.0.94)
+      foobara-files-generator (~> 0.0.1)
     foobara-empty-typescript-react-project-generator (0.0.4)
       foobara
       foobara-files-generator
@@ -111,12 +111,9 @@ GEM
     foobara-type-generator (0.0.4)
       foobara
       foobara-files-generator
-    foobara-typescript-react-command-form-generator (0.0.8)
-      foobara
-      foobara-files-generator
-      foobara-typescript-remote-command-generator
-    foobara-typescript-remote-command-generator (0.0.16)
-      foobara (~> 0.0.88)
+    foobara-typescript-react-command-form-generator (0.0.11)
+      foobara-typescript-remote-command-generator (~> 0.0.1)
+    foobara-typescript-remote-command-generator (0.0.17)
       foobara-files-generator (~> 0.0.1)
     foobara-util (0.0.11)
     formatador (1.1.0)
@@ -138,7 +135,7 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     hashdiff (1.1.2)
     io-console (0.8.0)
-    irb (1.15.1)
+    irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
@@ -186,7 +183,7 @@ GEM
     rdoc (6.13.1)
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
-    reline (0.6.0)
+    reline (0.6.1)
       io-console (~> 0.5)
     rexml (3.4.1)
     rspec (3.13.0)
@@ -205,7 +202,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.2)
-    rubocop (1.75.1)
+    rubocop (1.75.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -213,10 +210,10 @@ GEM
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
-      rubocop-ast (>= 1.43.0, < 2.0)
+      rubocop-ast (>= 1.44.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.43.0)
+    rubocop-ast (1.44.0)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
     rubocop-rake (0.7.1)

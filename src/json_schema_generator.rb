@@ -4,18 +4,18 @@ module Foobara
   module JsonSchemaGenerator
     class << self
       def to_json_schema(type, association_depth: AssociationDepth::ATOM)
-        poro = foobara_type_to_json_schema_type_poro(type, association_depth:)
+        poro = to_json_schema_structure(type, association_depth:)
 
         JSON.fast_generate(poro)
       end
 
+      def to_json_schema_structure(type, association_depth: AssociationDepth::ATOM)
+        foobara_type_to_json_schema_type_poro(type, association_depth:)
+      end
+
       private
 
-      def foobara_type_to_json_schema_type_poro(
-        type,
-        association_depth:,
-        within_entity: false
-      )
+      def foobara_type_to_json_schema_type_poro(type, association_depth:, within_entity: false)
         declaration_data = type.declaration_data
 
         # from other place
