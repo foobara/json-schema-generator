@@ -1,3 +1,7 @@
+## [0.0.5] - 2025-05-25
+
+- Support :attributes top-level type
+
 ## [0.0.4] - 2025-04-09
 
 - Add a .to_json_schema_structure method

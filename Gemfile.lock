@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    foobara-json-schema-generator (0.0.4)
+    foobara-json-schema-generator (0.0.5)
       foobara (~> 0.0.92)
 
 GEM

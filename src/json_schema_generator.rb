@@ -52,7 +52,7 @@ module Foobara
                       required = DataPath.value_at(:required, declaration_data)
                       h = { type: "object" }
 
-                      type.element_types.each_pair do |attribute_name, element_type|
+                      type.element_types&.each_pair do |attribute_name, element_type|
                         properties[attribute_name] = foobara_type_to_json_schema_type_poro(
                           element_type,
                           association_depth:,
