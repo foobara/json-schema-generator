@@ -42,7 +42,7 @@ RSpec.describe Foobara::JsonSchemaGenerator do
           attributes do
             id :integer
             foo :integer, :required, "must be one, two, or three", one_of: [1, 2, 3]
-            some_other_entity SomeOtherEntity
+            some_other_entity SomeOtherEntity, "some other random entity"
             some_model SomeModel
           end
 
@@ -66,7 +66,7 @@ RSpec.describe Foobara::JsonSchemaGenerator do
 
         properties = parsed_json_schema["properties"]
 
-        expect(properties.keys).to match_array(%w[entity1 some_array])
+        expect(properties.keys).to contain_exactly("entity1", "some_array")
         expect(properties.keys).to_not include("required")
 
         some_array = properties["some_array"]
@@ -80,7 +80,7 @@ RSpec.describe Foobara::JsonSchemaGenerator do
         expect(properties["entity1"]["properties"]["foo"]["enum"]).to eq([1, 2, 3])
         expect(
           properties["entity1"]["properties"]["some_model"]["properties"]["first_name"]["type"]
-        ).to eq(%w[string null])
+        ).to eq(["string", "null"])
 
         some_entity = SomeEntity.transaction do
           SomeEntity.create(

@@ -1,3 +1,7 @@
+## [0.0.6] - 2025-06-19
+
+- Improve the description on entity types converted to primary key types
+
 ## [0.0.5] - 2025-05-25
 
 - Support :attributes top-level type

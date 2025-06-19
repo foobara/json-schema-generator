@@ -15,21 +15,32 @@ module Foobara
 
       private
 
-      def foobara_type_to_json_schema_type_poro(type, association_depth:, within_entity: false)
+      def foobara_type_to_json_schema_type_poro(type, association_depth:, within_entity: false, description: nil)
         declaration_data = type.declaration_data
 
-        # from other place
         type_hash = if type.extends?(BuiltinTypes[:entity])
                       target_class = type.target_class
 
-                      child_type = if association_depth == AssociationDepth::PRIMARY_KEY_ONLY ||
-                                      (association_depth == AssociationDepth::ATOM && within_entity)
-                                     target_class.primary_key_type
-                                   else
-                                     target_class.attributes_type
-                                   end
+                      if association_depth == AssociationDepth::PRIMARY_KEY_ONLY ||
+                         (association_depth == AssociationDepth::ATOM && within_entity)
+                        description = unless type.extends_directly?(:entity)
+                                        [
+                                          "#{target_class.model_name} #{target_class.primary_key_attribute}",
+                                          type.description
+                                        ].join(" : ")
+                                      end
 
-                      foobara_type_to_json_schema_type_poro(child_type, association_depth:, within_entity: true)
+                        foobara_type_to_json_schema_type_poro(
+                          target_class.primary_key_type,
+                          description:,
+                          association_depth:,
+                          within_entity: true
+                        )
+                      else
+                        foobara_type_to_json_schema_type_poro(target_class.attributes_type,
+                                                              association_depth:, within_entity: true)
+                      end
+
                     elsif type.extends?(BuiltinTypes[:model])
                       foobara_type_to_json_schema_type_poro(type.target_class.attributes_type, association_depth:,
                                                                                                within_entity:)
@@ -107,7 +118,9 @@ module Foobara
           type_hash[:type] = [type_hash[:type], "null"]
         end
 
-        if !type.builtin? && type.description
+        if description
+          type_hash[:description] = description
+        elsif !type.builtin? && type.description
           type_hash[:description] = type.description
         end
 
