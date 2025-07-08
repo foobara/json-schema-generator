@@ -12,7 +12,11 @@ RSpec.describe Foobara::JsonSchemaGenerator do
     Foobara::Persistence.default_crud_driver = Foobara::Persistence::CrudDrivers::InMemory.new
   end
 
-  describe ".generate" do
+  describe ".to_json_schema" do
+    let(:json_schema) { described_class.to_json_schema(type, association_depth:) }
+    let(:parsed_json_schema) { JSON.parse(json_schema) }
+    let(:association_depth) { Foobara::AssociationDepth::ATOM }
+
     context "with a complex data type" do
       before do
         stub_class "SomeModel", Foobara::Model do
@@ -56,9 +60,6 @@ RSpec.describe Foobara::JsonSchemaGenerator do
           some_array [SomeOtherEntity]
         end
       end
-
-      let(:json_schema) { described_class.to_json_schema(type) }
-      let(:parsed_json_schema) { JSON.parse(json_schema) }
 
       it "results in a valid json schema" do
         expect(parsed_json_schema["type"]).to eq("object")
@@ -123,7 +124,7 @@ RSpec.describe Foobara::JsonSchemaGenerator do
       end
 
       context "when using an aggregate depth" do
-        let(:association_depth) { Foobara::JsonSchemaGenerator::AssociationDepth::AGGREGATE }
+        let(:association_depth) { Foobara::AssociationDepth::AGGREGATE }
 
         it "includes types in the json schema all the way down" do
           expect(parsed_json_schema).to be_a(Hash)

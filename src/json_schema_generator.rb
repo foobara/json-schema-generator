@@ -1,15 +1,13 @@
-require_relative "association_depth"
-
 module Foobara
   module JsonSchemaGenerator
     class << self
-      def to_json_schema(type, association_depth: AssociationDepth::ATOM)
+      def to_json_schema(type, association_depth: Foobara::AssociationDepth::ATOM)
         poro = to_json_schema_structure(type, association_depth:)
 
         JSON.fast_generate(poro)
       end
 
-      def to_json_schema_structure(type, association_depth: AssociationDepth::ATOM)
+      def to_json_schema_structure(type, association_depth: Foobara::AssociationDepth::ATOM)
         foobara_type_to_json_schema_type_poro(type, association_depth:)
       end
 
