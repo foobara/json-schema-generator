@@ -1,3 +1,7 @@
+## [1.0.0] - 2025-07-08
+
+- Fix bug resulting in incorrect description when converting entity to primary key
+
 ## [0.0.6] - 2025-06-19
 
 - Improve the description on entity types converted to primary key types

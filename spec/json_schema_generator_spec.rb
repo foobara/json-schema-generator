@@ -136,5 +136,75 @@ RSpec.describe Foobara::JsonSchemaGenerator do
         end
       end
     end
+
+    context "with an entity" do
+      let(:entity_class) do
+        stub_class "SomeEntity", Foobara::Entity do
+          description "this is some entity!"
+
+          attributes do
+            id :integer
+            foo :string, :required
+          end
+
+          primary_key :id
+        end
+      end
+
+      let(:type) do
+        Foobara::GlobalDomain.foobara_type_from_declaration(entity_class)
+      end
+
+      context "when primary key only" do
+        let(:association_depth) { Foobara::AssociationDepth::PRIMARY_KEY_ONLY }
+
+        it "results in a valid json schema with the primary key instead of the entity" do
+          expect(parsed_json_schema).to eq(
+            "type" => "number",
+            "description" => "SomeEntity id : this is some entity!"
+          )
+        end
+
+        context "when allow_nil" do
+          let(:type) do
+            Foobara::GlobalDomain.foobara_type_from_declaration entity_class, :allow_nil
+          end
+
+          it "includes nil as a type" do
+            expect(parsed_json_schema).to eq(
+              "type" => ["number", "null"],
+              "description" => "SomeEntity id"
+            )
+          end
+        end
+
+        context "with a custom description" do
+          let(:type) do
+            Foobara::GlobalDomain.foobara_type_from_declaration entity_class, description: "a custom description"
+          end
+
+          it "includes the custom description" do
+            expect(parsed_json_schema).to eq(
+              "type" => "number",
+              "description" => "SomeEntity id : a custom description"
+            )
+          end
+
+          context "when allow_nil" do
+            let(:type) do
+              Foobara::GlobalDomain.foobara_type_from_declaration entity_class, :allow_nil,
+                                                                  description: "a custom description"
+            end
+
+            it "includes nil as a type" do
+              expect(parsed_json_schema).to eq(
+                "type" => ["number", "null"],
+                "description" => "SomeEntity id : a custom description"
+              )
+            end
+          end
+        end
+      end
+    end
   end
 end

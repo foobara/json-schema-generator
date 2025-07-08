@@ -21,12 +21,10 @@ module Foobara
 
                       if association_depth == AssociationDepth::PRIMARY_KEY_ONLY ||
                          (association_depth == AssociationDepth::ATOM && within_entity)
-                        description = unless type.extends_directly?(:entity)
-                                        [
-                                          "#{target_class.model_name} #{target_class.primary_key_attribute}",
-                                          type.description
-                                        ].join(" : ")
-                                      end
+                        description = [
+                          "#{target_class.model_name} #{target_class.primary_key_attribute}",
+                          *type.description
+                        ].join(" : ")
 
                         foobara_type_to_json_schema_type_poro(
                           target_class.primary_key_type,
