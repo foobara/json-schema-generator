@@ -16,6 +16,7 @@ RSpec.describe Foobara::JsonSchemaGenerator do
     let(:json_schema) { described_class.to_json_schema(type, association_depth:) }
     let(:parsed_json_schema) { JSON.parse(json_schema) }
     let(:association_depth) { Foobara::AssociationDepth::ATOM }
+    let(:type) { Foobara::GlobalDomain.foobara_type_from_declaration(type_declaration) }
 
     context "with a complex data type" do
       before do
@@ -203,6 +204,38 @@ RSpec.describe Foobara::JsonSchemaGenerator do
               )
             end
           end
+        end
+      end
+    end
+
+    context "with a tuple" do
+      let(:type_declaration) { [:integer, :string, :integer] }
+
+      it "results in a valid json schema with the expected types and sizes" do
+        expect(parsed_json_schema).to eq(
+          "type" => "array",
+          "items" => [
+            { "type" => "number" },
+            { "type" => "string" },
+            { "type" => "number" }
+          ],
+          "minItems" => 3,
+          "maxItems" => 3,
+          "additionalItems" => false
+        )
+      end
+
+      context "when all the items have the same type" do
+        let(:type_declaration) { [:integer, :integer, :integer] }
+
+        it "just gives one items type for simplicity" do
+          expect(parsed_json_schema).to eq(
+            "type" => "array",
+            "items" => { "type" => "number" },
+            "minItems" => 3,
+            "maxItems" => 3,
+            "additionalItems" => false
+          )
         end
       end
     end

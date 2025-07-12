@@ -41,10 +41,25 @@ module Foobara
                       foobara_type_to_json_schema_type_poro(type.target_class.attributes_type, association_depth:,
                                                                                                within_entity:)
                     elsif type.extends?(BuiltinTypes[:tuple])
-                      # TODO: implement this logic for tuple
-                      # :nocov:
-                      raise ArgumentError, "Tuple not yet supported"
-                      # :nocov:
+                      element_types = type.element_types
+                      size = element_types.size
+                      items = element_types.map do |element_type|
+                        foobara_type_to_json_schema_type_poro(element_type, association_depth:, within_entity:)
+                      end
+
+                      uniq_items = items.uniq
+
+                      if uniq_items.size == 1
+                        items = uniq_items.first
+                      end
+
+                      {
+                        type: "array",
+                        additionalItems: false,
+                        minItems: size,
+                        maxItems: size,
+                        items:
+                      }
                     elsif type.extends?(BuiltinTypes[:array])
                       items = if type.element_type
                                 foobara_type_to_json_schema_type_poro(type.element_type, association_depth:,

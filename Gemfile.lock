@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    foobara-json-schema-generator (1.0.0)
-      foobara (~> 0.0.92)
+    foobara-json-schema-generator (1.0.1)
+      foobara (>= 0.0.136, < 2.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -121,7 +121,7 @@ GEM
     foobara-typescript-remote-command-generator (0.0.24)
       foobara-files-generator (~> 0.0.1)
     foobara-util (1.0.1)
-    formatador (1.1.0)
+    formatador (1.1.1)
     guard (2.19.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -146,7 +146,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.12.2)
-    json-schema (5.1.1)
+    json-schema (5.2.1)
       addressable (~> 2.8)
       bigdecimal (~> 3.1)
     language_server-protocol (3.17.0.5)
@@ -266,10 +266,10 @@ PLATFORMS
 
 DEPENDENCIES
   foob
-  foobara-dotenv-loader (~> 0.0.1)
+  foobara-dotenv-loader (< 2.0.0)
   foobara-json-schema-generator!
   foobara-rubocop-rules (>= 1.0.0)
-  foobara-spec-helpers (~> 0.0.1)
+  foobara-spec-helpers (< 2.0.0)
   guard-rspec
   irb
   json-schema

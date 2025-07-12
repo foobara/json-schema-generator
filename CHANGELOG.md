@@ -1,3 +1,7 @@
+## [1.0.1] - 2025-07-12
+
+- Add support for tuples
+
 ## [1.0.0] - 2025-07-08
 
 - Fix bug resulting in incorrect description when converting entity to primary key
