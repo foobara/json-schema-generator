@@ -5,12 +5,14 @@ ruby Foobara::JsonSchemaGenerator::MINIMUM_RUBY_VERSION
 
 gemspec
 
+# gem "foobara", path: "../foobara"
+
 gem "foobara-dotenv-loader", "< 2.0.0"
 
 gem "rake"
 
 group :development do
-  gem "foob"
+  gem "foob", "< 2.0.0"
   gem "foobara-rubocop-rules", ">= 1.0.0"
   gem "guard-rspec"
   gem "rubocop-rake"

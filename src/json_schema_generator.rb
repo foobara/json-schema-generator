@@ -117,16 +117,18 @@ module Foobara
                       # :nocov:
                     end
 
-        one_of = DataPath.value_at(:one_of, declaration_data)
+        unless type.primitive?
+          one_of = DataPath.value_at(:one_of, declaration_data)
 
-        if one_of&.any?
-          type_hash[:enum] = one_of
-        end
+          if one_of&.any?
+            type_hash[:enum] = one_of
+          end
 
-        allow_nil = DataPath.value_at(:allow_nil, declaration_data)
+          allow_nil = DataPath.value_at(:allow_nil, declaration_data)
 
-        if allow_nil && type_hash.key?(:type)
-          type_hash[:type] = [type_hash[:type], "null"]
+          if allow_nil && type_hash.key?(:type)
+            type_hash[:type] = [type_hash[:type], "null"]
+          end
         end
 
         if description
