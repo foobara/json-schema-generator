@@ -23,10 +23,6 @@ group :development, :test do
   gem "json-schema"
   gem "pry"
   gem "pry-byebug"
-  # TODO: Just adding this to suppress warnings seemingly coming from pry-byebug. Can probably remove this once
-  # pry-byebug has irb as a gem dependency
-  gem "irb"
-  gem "readline-ext"
 end
 
 group :test do
