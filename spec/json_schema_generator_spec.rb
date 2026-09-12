@@ -105,21 +105,21 @@ RSpec.describe Foobara::JsonSchemaGenerator do
           some_array: [some_other_entity_json, some_other_entity_json]
         }
 
-        json = JSON.fast_generate(data)
+        json = JSON.generate(data)
 
         expect(json).to be_a(String)
 
         expect { JSON::Validator.validate!(JSON.parse(json_schema), JSON.parse(json)) }.to_not raise_error
 
         data[:entity1][:foo] = 4
-        json = JSON.fast_generate(data)
+        json = JSON.generate(data)
 
         expect {
           JSON::Validator.validate!(JSON.parse(json_schema), JSON.parse(json))
         }.to raise_error(JSON::Schema::ValidationError)
 
         data[:entity1][:foo] = 3
-        json = JSON.fast_generate(data)
+        json = JSON.generate(data)
 
         expect { JSON::Validator.validate!(JSON.parse(json_schema), JSON.parse(json)) }.to_not raise_error
       end

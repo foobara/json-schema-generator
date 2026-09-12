@@ -1,3 +1,7 @@
+## [1.1.1] - 2026-09-11
+
+- Handle removed JSON.fast_generate
+
 ## [1.1.0] - 2025-08-22
 
 - Handle Foobara 0.1.0 declaration changes

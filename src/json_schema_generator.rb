@@ -4,7 +4,7 @@ module Foobara
       def to_json_schema(type, association_depth: Foobara::AssociationDepth::ATOM)
         poro = to_json_schema_structure(type, association_depth:)
 
-        JSON.fast_generate(poro)
+        JSON.generate(poro)
       end
 
       def to_json_schema_structure(type, association_depth: Foobara::AssociationDepth::ATOM)
@@ -105,16 +105,16 @@ module Foobara
                       { type: "number" }
                     elsif type.extends?(BuiltinTypes[:associative_array])
                       # TODO: implement this
-                      # :nocov:
+                      # simplecov:disable
                       raise ArgumentError, "Associative array not yet supported"
-                      # :nocov:
+                      # simplecov:enable
                     elsif type.extends?(BuiltinTypes[:duck])
                       {}
                     else
-                      # :nocov:
+                      # simplecov:disable
                       # This should be unreachable because every type extends duck...
                       raise ArgumentError, "Unable to convert #{declaration_data} to a JSON schema type"
-                      # :nocov:
+                      # simplecov:enable
                     end
 
         unless type.primitive?

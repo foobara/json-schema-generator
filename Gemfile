@@ -26,6 +26,7 @@ group :development, :test do
   # TODO: Just adding this to suppress warnings seemingly coming from pry-byebug. Can probably remove this once
   # pry-byebug has irb as a gem dependency
   gem "irb"
+  gem "readline-ext"
 end
 
 group :test do
@@ -34,6 +35,4 @@ group :test do
   gem "rspec-its"
   gem "ruby-prof"
   gem "simplecov"
-  gem "vcr"
-  gem "webmock"
 end
